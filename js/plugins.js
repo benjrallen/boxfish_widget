@@ -113,7 +113,7 @@ var Ease = Ease || {};
 					dataType: 	'jsonp',
 					jsonp: 		'success',
 					data: {
-						wait: 	( this.loading ? 0 : this.random( 10 ) ) //some integer between 0 and 30, after first load
+						wait: 	( this.loading ? this.random( 2 ) : this.random( 30 ) ) //some integer between 0 and 30, after first load
 					},
 					success: 	function( data, status, xhr ){
 						that.onRequestSuccess.apply( that, arguments );
