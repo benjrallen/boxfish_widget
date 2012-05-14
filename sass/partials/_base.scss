@@ -1,0 +1,37 @@
+// This file must be imported before loading html5-boilerplate
+
+$base-font-family: unquote('sans-serif');  // default font-family
+$base-font-size: 13px;  // default font-size for YUI fonts
+$base-line-height: 1.231;  // default line-height for YUI fonts
+$font-color: #444;
+$link-color: #607890;
+$link-hover-color: #036;
+$link-active-color: #607890;
+$link-visited-color: #607890;
+
+
+//include the reset from bootstrap, but don't need all of bootstrap for this
+@import "compass_twitter_bootstrap_basic";
+
+//typography
+@import "compass/typography";
+
+//utilities
+@import "compass/utilities";
+
+//and css3
+@import "compass/css3/pie";
+@import "compass/css3";
+
+
+
+$base-font-size: 12px;
+$base-line-height: 16px;
+
+
+//radial gradients in ie9 & opera
+$experimental-support-for-svg: true;
+
+@include establish-baseline( $base-font-size );
+
+@import "partials/_mixins";

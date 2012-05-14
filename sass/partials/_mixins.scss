@@ -1,0 +1,16 @@
+
+@mixin alpha-lighten-grad( $dir ){
+	@include background(
+		linear-gradient(
+			$dir,
+			rgba( 255,255,255, 0.3 ) 0%,
+			rgba( 255,255,255, 0.1 ) 25%,
+			rgba( 255,255,255, 0.1 ) 75%,
+			rgba( 255,255,255, 0.3 ) 100%
+		)
+	);
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#4CFFFFFF,endColorstr=#19FFFFFF)"; /* IE8 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4CFFFFFF,endColorstr=#19FFFFFF);   /* IE6 & 7 */
+      zoom: 1;
+}
+
