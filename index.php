@@ -9,9 +9,9 @@
   
     <script type="text/javascript" src="js/modernizr.js"></script>
     <script type="text/javascript">
-      //var _gaq = _gaq || [];
-      //_gaq.push(['_setAccount', 'UA-31603590-1']);
-      //_gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-31664329-1']);
+      _gaq.push(['_trackPageview']);
 
       Modernizr.load([
         { load: ['//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'],
@@ -19,13 +19,13 @@
       	},
       	{ test: window.JSON, nope: 'js/json2.js' },
       	<?php /* plugins.js & common.js fordevelopment */ ?>
-      	{ load: 'js/plugins.js' },
-      	{ load: 'js/common.js' }
-      	<?php /* concatenate and optimize seperate script files for deployment using google closure compiler (compiler.jar) in js folder */ ?>
       	<?php /* ?>
-      	{ load : 'js/theme.js' },
+      	{ load: 'js/plugins.js' },
+      	{ load: 'js/common.js' },
       	<?php */ ?>
-      	//{ load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js' }
+      	<?php /* concatenate and optimize seperate script files for deployment using google closure compiler (compiler.jar) in js folder */ ?>
+      	{ load : 'js/theme.js' },
+      	{ load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js' }
       ]);
     </script>
 	  <link rel="stylesheet" href="css/style.css" />

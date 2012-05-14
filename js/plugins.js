@@ -45,6 +45,8 @@ function prettyDate(time){
 		day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
 }
 
+
+//Ease is the namespace I use out of habit.
 var Ease = Ease || {};
 
 (function($){
@@ -59,7 +61,7 @@ var Ease = Ease || {};
 		this.settings = {
 			url: 		'http://api.staging.boxfish.com/v1/demo/codetest/?callback=?',
 			cont: 		'#widget-container',
-			maxBlurbs: 	10, 
+			maxBlurbs: 	10
 		};
 		
 		$.extend( this.settings, config );
@@ -93,13 +95,14 @@ var Ease = Ease || {};
 				that.onAddBlurb();
 			});
 			
+			//get the data
 			this.requestData();
 			
 		}, 
 		
 		//make a random integer from zero to whatever number
 		random: function( limit ){
-			//bitwise OR can be MUCH faster than Math.floor:  http://jsperf.com/or-vs-floor
+			//bitwise OR can be a lot faster than Math.floor:  http://jsperf.com/or-vs-floor
 			return ~~( Math.random() * limit );
 		},
 		
@@ -124,13 +127,9 @@ var Ease = Ease || {};
 			);
 		},
 		
-		onRequestSuccess: function( data, status, xhr ){
-			console.log( 'success', arguments );
-			
+		onRequestSuccess: function( data, status, xhr ){			
 			//make a new blurb, and tell it where to put itself
 			this.blurbs.push( new Ease.Boxfish.Blurb( this, data, { cont: this.$content }) );
-					
-			console.log( this.blurbs );
 		},
 		
 		//happens on error or success for the json request
@@ -144,13 +143,13 @@ var Ease = Ease || {};
 			if( idx > -1 )
 				this.requests.splice( idx, 1 );
 			
-			//request an update
+			//request more data
 			this.requestData();
 		},
 		
-		onAddBlurb: function(){
-			console.log('blurb added!');
-			
+		//runs every time a blurb is added to the widget.  
+		//	keeps the number of blurbs in check and everything up to date
+		onAddBlurb: function(){			
 			//remove the loading screen
 			if( this.loading ){
 				this.loading = false;
@@ -183,20 +182,16 @@ var Ease = Ease || {};
 		};
 		
 		$.extend( this.settings, config );
-		
-		console.log( 'settings', this.settings );
-		
+				
 		this.init();
 	};
 	
 	Ease.Boxfish.Blurb.prototype = {
 		
 		init: function(){
-			//console.log( 'init blurb', this );
 			var that = this;
 			
 			//make the blurb and prepend it to the right container
-			// TODO, add animation
 			this.$blurb = this.makeBlurb()
 							.hide()
 							.prependTo( this.settings.cont )
@@ -209,8 +204,7 @@ var Ease = Ease || {};
 		},
 		
 		makeBlurb: function(){
-			console.log( 'making blurb', this.data );
-			
+			//console.log( 'making blurb', this.data );
 			var block = $('<div />', {}).addClass( this.settings.blurbClass );
 			
 			//pic & time
@@ -277,21 +271,19 @@ var Ease = Ease || {};
 			//the time... 
 			//try to make it pretty at first
 			var time = prettyDate( this.data.time );
-				time = time ? time : this.data.time;
+				time = time ? time : this.data.time;  //TODO write fallback format function if prettyDate returns NaN or undefined
 			
 			return time;
 		},
 		
+		//fired on blurb add
 		updateTime: function(){
 			this.$time.text( this.getTime() );
 		},
 		
 		//removes the blurb from the DOM
-		destroy: function(){
-			console.log( 'destroy me!', this );
-			
+		destroy: function(){			
 			this.$blurb.remove();
-			//TODO: remove() the dom object
 		}
 	};
 	
